@@ -1,14 +1,16 @@
-from dataclasses import dataclass
+from pydantic import BaseModel, ConfigDict
 
 
-@dataclass(frozen=True)
-class Geo:
+class ApiModel(BaseModel):
+    model_config = ConfigDict(frozen=True)
+
+
+class Geo(ApiModel):
     lat: str
     lng: str
 
 
-@dataclass(frozen=True)
-class Address:
+class Address(ApiModel):
     street: str
     suite: str
     city: str
@@ -16,15 +18,13 @@ class Address:
     geo: Geo
 
 
-@dataclass(frozen=True)
-class Company:
+class Company(ApiModel):
     name: str
     catchPhrase: str
     bs: str
 
 
-@dataclass(frozen=True)
-class User:
+class User(ApiModel):
     id: int
     name: str
     username: str

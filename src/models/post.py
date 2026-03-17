@@ -1,8 +1,7 @@
-from dataclasses import dataclass
+from src.models.user import ApiModel
 
 
-@dataclass(frozen=True)
-class Post:
+class Post(ApiModel):
     userId: int
     id: int
     title: str

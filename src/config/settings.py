@@ -1,11 +1,12 @@
-from dataclasses import dataclass
-import os
+from pydantic import Field
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
-@dataclass(frozen=True)
-class Settings:
-    base_url: str = os.getenv("BASE_URL", "https://jsonplaceholder.typicode.com")
-    timeout: float = float(os.getenv("API_TIMEOUT", "10"))
+class Settings(BaseSettings):
+    model_config = SettingsConfigDict(frozen=True, env_prefix="", extra="ignore")
+
+    base_url: str = Field(default="https://jsonplaceholder.typicode.com", alias="BASE_URL")
+    timeout: float = Field(default=10.0, alias="API_TIMEOUT")
 
 
 settings = Settings()
